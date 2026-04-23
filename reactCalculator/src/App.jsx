@@ -1,33 +1,47 @@
-import { useState } from 'react'
-import { BotonCalcular } from './components/BotonCalcular';   
-
+import { useState } from 'react';
+import CalculadoraSimple from './components/CalculadoraSimple';
+import CalculadoraCompleta from './components/CalculadoraCompleta';
 
 function App() {
-  const [num1, setNum1] = useState('');
-  const [num2, setNum2] = useState('');
-  return (
-    <div className="container">
-      <h1>Calculadora </h1>
-      
-      <div className="input-group">
-        <input 
-          type="number" 
-          placeholder="Número 1" 
-          value={num1}
-          onChange={(e) => setNum1(e.target.value)} 
-        />
-        
-        <input 
-          type="number" 
-          placeholder="Número 2" 
-          value={num2}
-          onChange={(e) => setNum2(e.target.value)} 
-        />
-      </div>
+  const [seccion, setSeccion] = useState('home');
 
-      <BotonCalcular n1={num1} n2={num2} />
+  const irAlInicio = () => setSeccion('home');
+  const irASimple = () => setSeccion('simple');
+  const irACompleta = () => setSeccion('completa');
+
+  return (
+    <div>
+      <h1>Mi Proyecto React</h1>
+      <hr />
+
+      {/* RENDERIZADO DEL MENÚ  */}
+      {seccion === 'home' && (
+        <div>
+          <h2>Menú Principal</h2>
+          <p>Elige qué calculadora quieres usar:</p>
+          <button onClick={irASimple}>
+            Calculadora Simple 
+          </button>
+          <button onClick={irACompleta}>
+            Calculadora Completa 
+          </button>
+        </div>
+      )}
+
+      {/* RENDERIZADO DEL BOTÓN VOLVER */}
+      {seccion !== 'home' && (
+        <div>
+          <button onClick={irAlInicio}>
+            ⬅ Volver al Menú
+          </button>
+        </div>
+      )}
+
+      {/* RENDERIZADO DE LOS COMPONENTES (Las pantallas) */}
+      {seccion === 'simple' && <CalculadoraSimple />}
+      {seccion === 'completa' && <CalculadoraCompleta />}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
