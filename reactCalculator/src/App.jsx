@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import CalculadoraSimple from './components/CalculadoraSimple';
 import CalculadoraCompleta from './components/CalculadoraCompleta';
+import Buscador from './components/Buscador';
 
 function App() {
   const [seccion, setSeccion] = useState('home');
@@ -8,22 +9,27 @@ function App() {
   const irAlInicio = () => setSeccion('home');
   const irASimple = () => setSeccion('simple');
   const irACompleta = () => setSeccion('completa');
+  const irABuscador = () => setSeccion('buscador');
+  
 
   return (
     <div>
-      <h1>Mi Proyecto React</h1>
+      <h1>Mi Proyecto </h1>
       <hr />
 
       {/* RENDERIZADO DEL MENÚ  */}
       {seccion === 'home' && (
         <div>
           <h2>Menú Principal</h2>
-          <p>Elige qué calculadora quieres usar:</p>
+          <p>Elige qué Aplicacion quieres usar:</p>
           <button onClick={irASimple}>
             Calculadora Simple 
           </button>
           <button onClick={irACompleta}>
             Calculadora Completa 
+          </button>
+          <button onClick={irABuscador}>
+            Buscador
           </button>
         </div>
       )}
@@ -40,6 +46,8 @@ function App() {
       {/* RENDERIZADO DE LOS COMPONENTES (Las pantallas) */}
       {seccion === 'simple' && <CalculadoraSimple />}
       {seccion === 'completa' && <CalculadoraCompleta />}
+      {seccion === 'buscador' && <Buscador />}
+
     </div>
   );
 }
