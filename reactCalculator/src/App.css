@@ -1,0 +1,530 @@
+ /* =========================================
+
+   1. FUENTES, VARIABLES Y RESET
+
+   ========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+
+
+:root {
+
+  /* Paleta "Foodie" (Apetitosa y cálida) */
+
+  --primary-color: #ff6b6b; /* Rojo Coral */
+
+  --primary-hover: #fa5252;
+
+  --secondary-color: #fca311; /* Naranja cálido */
+
+  --bg-color: #fff8f0; /* Blanco crema */
+
+  --card-bg: #ffffff;
+
+  --text-main: #2b2d42;
+
+  --text-muted: #8d99ae;
+
+  --border-radius: 16px; /* Bordes más redondeados y modernos */
+
+}
+
+
+
+* {
+
+  box-sizing: border-box;
+
+  margin: 0;
+
+  padding: 0;
+
+}
+
+
+
+body {
+
+  font-family: 'Poppins', sans-serif;
+
+  background-color: var(--bg-color);
+
+  color: var(--text-main);
+
+  /* Un patrón muy sutil de fondo para darle textura */
+
+  background-image: radial-gradient(#fca311 0.5px, transparent 0.5px);
+
+  background-size: 20px 20px;
+
+  background-color: var(--bg-color);
+
+}
+
+
+
+/* =========================================
+
+   ESTILOS PARA EL MENÚ DE TARJETAS (HOME)
+
+   ========================================= */
+
+
+
+.home-container {
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 40px 20px;
+
+  text-align: center;
+
+}
+
+
+
+.home-title {
+
+  font-size: 2.5rem;
+
+  font-weight: 800;
+
+  color: var(--text-main);
+
+  margin-bottom: 10px;
+
+}
+
+
+
+.home-subtitle {
+
+  font-size: 1.1rem;
+
+  color: var(--text-muted);
+
+  margin-bottom: 40px;
+
+}
+
+
+
+/* Contenedor de las 3 tarjetas */
+
+.menu-grid {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  justify-content: center;
+
+  gap: 30px;
+
+  width: 100%;
+
+  max-width: 1100px;
+
+}
+
+
+
+/* Estilo de la Tarjeta Individual */
+
+.menu-card {
+
+  flex: 1 1 300px;
+
+  max-width: 320px;
+
+  height: 220px;
+
+  background: white;
+
+  border-radius: 20px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  cursor: pointer;
+
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  border: 1px solid rgba(0,0,0,0.05);
+
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+
+  text-decoration: none;
+
+}
+
+
+
+/* Efectos al pasar el mouse */
+
+.menu-card:hover {
+
+  transform: translateY(-15px);
+
+  box-shadow: 0 20px 40px rgba(255, 107, 107, 0.2);
+
+  border-color: var(--primary-color);
+
+}
+
+
+
+/* Iconos gigantes dentro de las tarjetas */
+
+.card-icon {
+
+  font-size: 3.5rem;
+
+  margin-bottom: 15px;
+
+  transition: transform 0.3s ease;
+
+}
+
+
+
+.menu-card:hover .card-icon {
+
+  transform: scale(1.2);
+
+}
+
+
+
+.card-title {
+
+  font-size: 1.4rem;
+
+  font-weight: 700;
+
+  color: var(--text-main);
+
+}
+
+
+
+/* Variaciones de color para cada tarjeta (Degradados suaves) */
+
+.card-simple { border-bottom: 6px solid #4cc9f0; }
+
+.card-completa { border-bottom: 6px solid #fca311; }
+
+.card-buscador { border-bottom: 6px solid #ff6b6b; }
+
+
+
+/* Responsivo para móviles */
+
+@media (max-width: 600px) {
+
+  .menu-card {
+
+    flex: 1 1 100%;
+
+    height: 180px;
+
+  }
+
+  .home-title {
+
+    font-size: 1.8rem;
+
+  }
+
+}
+
+
+
+
+/* =========================================
+
+   3. BUSCADOR Y TARJETAS (FLEXBOX)
+
+   ========================================= */
+
+.search-box {
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 15px;
+
+  margin-bottom: 50px;
+
+  margin-top: 20px;
+
+}
+
+
+
+.search-box input {
+
+  width: 100%;
+
+  max-width: 450px;
+
+}
+
+
+
+.contenedor-tarjetas {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 25px;
+
+  justify-content: center;
+
+  padding: 0 20px;
+
+}
+
+
+
+.tarjeta {
+
+  display: flex;
+
+  flex-direction: column;
+
+  background-color: var(--card-bg);
+
+  border-radius: var(--border-radius);
+
+  padding: 20px;
+
+  box-shadow: 0 10px 20px rgba(0,0,0,0.04);
+
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+
+  overflow: hidden; /* Importante para que el zoom de la imagen no se salga */
+
+ 
+
+  /* Lógica Flexbox: Max 4, Min 2 */
+
+  flex: 1 1 calc(25% - 25px);
+
+  max-width: calc(25% - 25px);
+
+}
+
+
+
+/* Magia de Hover: La tarjeta salta y la imagen hace zoom */
+
+.tarjeta:hover {
+
+  transform: translateY(-8px);
+
+  box-shadow: 0 15px 30px rgba(255, 107, 107, 0.15);
+
+}
+
+
+
+.tarjeta:hover .tarjeta-img {
+
+  transform: scale(1.08) rotate(2deg);
+
+}
+
+
+
+.tarjeta-header {
+
+  display: flex;
+
+  gap: 15px;
+
+}
+
+
+
+.cont-img {
+
+  width: 100px;
+
+  height: 100px;
+
+  border-radius: 12px;
+
+  overflow: hidden;
+
+  flex-shrink: 0;
+
+}
+
+
+
+.tarjeta-img {
+
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+
+  transition: transform 0.4s ease;
+
+}
+
+
+
+/* Etiquetas tipo "Píldora" para Categoría y Origen */
+
+.badge {
+
+  display: inline-block;
+
+  background-color: #fff0f0;
+
+  color: var(--primary-color);
+
+  padding: 4px 10px;
+
+  border-radius: 20px;
+
+  font-size: 0.75rem;
+
+  font-weight: 600;
+
+  margin-top: 5px;
+
+  margin-right: 5px;
+
+}
+
+
+
+.tarjeta-body {
+
+  flex-grow: 1;
+
+  margin-top: 20px;
+
+  color: var(--text-muted);
+
+  font-size: 0.9rem;
+
+  line-height: 1.6;
+
+}
+
+
+
+.tarjeta-footer {
+
+  display: flex;
+
+  justify-content: flex-end;
+
+  margin-top: 20px;
+
+  padding-top: 15px;
+
+  border-top: 1px dashed #eee;
+
+}
+
+
+
+/* =========================================
+
+   4. RESPONSIVE DESIGN
+
+   ========================================= */
+
+@media (max-width: 900px) {
+
+  .tarjeta {
+
+      flex: 1 1 calc(50% - 25px);
+
+      max-width: calc(50% - 25px);
+
+  }
+
+}
+
+
+
+@media (max-width: 600px) {
+
+  .tarjeta {
+
+      flex: 1 1 100%;
+
+      max-width: 100%;
+
+  }
+
+  .search-box {
+
+      flex-direction: column;
+
+      align-items: center;
+
+  }
+
+  .search-box input {
+
+      max-width: 100%;
+
+  }
+
+}
+
+
+/* Estilo para el pie de la tarjeta */
+.tarjeta-footer {
+  display: flex;
+  justify-content: flex-end; /* Esto empuja el botón a la derecha */
+  margin-top: auto; 
+  padding-top: 15px;
+  border-top: 1px dashed #eee;
+}
+
+/* Refuerzo para el botón primario (si no lo tenías completo) */
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+   /* El botón ocupa todo el ancho disponible */
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  transform: scale(1.03);
+  box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
